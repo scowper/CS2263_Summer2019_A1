@@ -35,7 +35,7 @@ Stack.o: Stack.c
 
 ##################################################################
 # Test Cases
-test: exit_test push_test peek_test pop_test compound_test
+test: exit_test push_test peek_test pop_test compound_test my_test
 
 ##############################
 # exit test cases
@@ -102,4 +102,10 @@ compound_test2: Stack
 compound_test3: Stack
 	./Stack < Data/compound_test3.input > compound_test3.result
 	./TestPassed.sh compound_test3.result Data/compound_test3.expected
+#############################
+#my test
+my_test: my_test1
+my_test1: Stack
+	./Stack < Data/MyTest.input > MyTest.result
+	./TestPassed.sh MyTest.result Data/MyTest.expected
 
