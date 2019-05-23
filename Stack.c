@@ -72,6 +72,14 @@ bool push(int *stack, int *size, int max_size, int to_push)
 	/**
 	 * TODO: finish implementing this
 	 */
+  if(*size == max_size)
+    {
+      return false;
+    }
+  *(stack + *size) = to_push;
+  *size = *size +1;
+  return true;
+  
 }
 
 /**
@@ -94,6 +102,14 @@ bool pop(int *stack, int *size, int *to_return)
 	/**
 	 * TODO: finish implementing this
 	 */
+  if(*size == 0)
+    {
+      return false;
+    }
+  *to_return = *(stack + *size-1);
+  *size = *size -1;
+    return true;
+  
 }
 
 /**
@@ -116,6 +132,12 @@ bool peek(int *stack, int *size, int *to_return)
 	/**
 	 * TODO: finish implementing this
 	 */
+  if(*size == 0)
+    {
+      return false;
+    }
+  *to_return = *(stack + *size -1);
+  return true;
 }
 
 /*******************************************************
@@ -196,9 +218,56 @@ int main( int argc, char **argv )
 		// the character could be a whitespace so we need to skip those
 		if( false == is_whitespace(input_instruction) )
 		{
-			/**
-			 * TODO: finish implementing this
-			 */
+		  if(input_instruction == 'u')
+		    {
+		      int input;
+		      scanf("%d", &input);
+		      if(push(stack, &stack_current_size, stack_max_size, input))
+			{
+			  printf("%d\n", input);
+			  successful_instructions = successful_instructions +1;
+			}
+		      else
+			{
+			  printf("failed push\n");
+			}
+		    }
+		  else if(input_instruction == 'o')
+		    {
+		      int val;
+		      scanf("%d", &val);
+		      if(!pop(stack, &stack_current_size, &val))
+			{
+			  printf("failed pop\n");
+			}
+		      else
+			{
+			  printf("%d\n", val);
+			  successful_instructions = successful_instructions +1;
+			}
+		    }
+		  else if(input_instruction == 'e')
+		    {
+		      int val;
+		      scanf("%d", &val);
+		      if(!peek(stack, &stack_current_size, &val))
+			{
+			  printf("failed peek\n");
+			}
+		      else
+			{
+			  printf("%d\n", val);
+			  successful_instructions = successful_instructions +1;
+			}
+		    }
+		  else if(input_instruction == 'x')
+		      {
+			stop_execution = true;
+		      }
+		  else
+		    {
+		      printf("invalid instruction %c\n", input_instruction);
+		    }
 		}
 	}
 
